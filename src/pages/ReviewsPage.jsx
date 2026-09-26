@@ -31,14 +31,22 @@ export default function ReviewsPage() {
       <section className="section">
         <div className="container">
           <Reveal>
-            <SectionHeading title="Как менялся уровень учеников" />
+            <SectionHeading
+              title="Результаты по годам"
+              intro="Баллы учеников за последние годы"
+            />
           </Reveal>
-          <Reveal as="div" className="card-grid card-grid--three">
-            {results.cases.map((item) => (
-              <article className="case" key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
+          <Reveal as="div" className="results-years">
+            {results.years.map((row, index) => (
+              <div className="results-year" key={`${index}-${row.year}`}>
+                <span className="results-year__year">{row.year}</span>
+                <span className="results-year__scores">{row.scores}</span>
+              </div>
+            ))}
+          </Reveal>
+          <Reveal as="div" className="results-notes">
+            {results.notes.map((note, index) => (
+              <p key={`${index}-${note}`}>{note}</p>
             ))}
           </Reveal>
         </div>
@@ -50,8 +58,8 @@ export default function ReviewsPage() {
             <SectionHeading title="Отзывы" />
           </Reveal>
           <Reveal as="div" className="reviews-grid">
-            {reviews.map((review) => (
-              <ReviewCard {...review} key={review.name + review.role} />
+            {reviews.map((review, index) => (
+              <ReviewCard {...review} key={`${index}-${review.name}`} />
             ))}
           </Reveal>
         </div>
